@@ -5,7 +5,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 interface AnimatedTextProps {
   children: ReactNode;
   className?: string;
-  variant?: "fade" | "slide-up" | "slide-down" | "zoom";
+  variant?: "fade" | "slide-up" | "slide-down" | "zoom" | "slide-in-left" | "slide-in-right";
   delay?: number;
   once?: boolean;
 }
@@ -24,14 +24,18 @@ const AnimatedText = ({
     fade: "opacity-0 transition-opacity duration-700",
     "slide-up": "opacity-0 translate-y-8 transition-all duration-700",
     "slide-down": "opacity-0 -translate-y-8 transition-all duration-700",
-    zoom: "opacity-0 scale-95 transition-all duration-700",
+    "zoom": "opacity-0 scale-95 transition-all duration-700",
+    "slide-in-left": "opacity-0 -translate-x-16 transition-all duration-700",
+    "slide-in-right": "opacity-0 translate-x-16 transition-all duration-700",
   };
 
   const activeStyles = {
     fade: "opacity-100",
     "slide-up": "opacity-100 translate-y-0",
     "slide-down": "opacity-100 translate-y-0",
-    zoom: "opacity-100 scale-100",
+    "zoom": "opacity-100 scale-100",
+    "slide-in-left": "opacity-100 translate-x-0",
+    "slide-in-right": "opacity-100 translate-x-0",
   };
 
   useEffect(() => {
