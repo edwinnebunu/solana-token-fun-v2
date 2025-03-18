@@ -1,5 +1,5 @@
 
-import { TrendingUp, Zap, DollarSign, Lock } from "lucide-react";
+import { TrendingUp, Zap, DollarSign, Lock, Check, X } from "lucide-react";
 import AnimatedText from "./AnimatedText";
 import { cn } from "@/lib/utils";
 
@@ -8,16 +8,32 @@ interface ComparisonItemProps {
   us: string;
   them: string;
   highlight?: boolean;
+  usHasFeature?: boolean;
+  themHasFeature?: boolean;
 }
 
-const ComparisonItem = ({ title, us, them, highlight = false }: ComparisonItemProps) => (
+const ComparisonItem = ({ title, us, them, highlight = false, usHasFeature, themHasFeature }: ComparisonItemProps) => (
   <div className={cn(
     "grid grid-cols-3 gap-4 py-4 border-b border-gray-800",
     highlight && "bg-flashmeme-green/5 rounded-lg"
   )}>
     <div className="font-medium text-white">{title}</div>
-    <div className="text-flashmeme-green font-semibold">{us}</div>
-    <div className="text-gray-400">{them}</div>
+    <div className="text-flashmeme-green font-semibold flex items-center gap-2">
+      {usHasFeature !== undefined && (
+        usHasFeature ? 
+          <Check className="h-5 w-5 text-flashmeme-green bg-flashmeme-green/20 p-1 rounded-full" /> : 
+          <X className="h-5 w-5 text-red-500 bg-red-500/20 p-1 rounded-full" />
+      )}
+      {us}
+    </div>
+    <div className="text-gray-400 flex items-center gap-2">
+      {themHasFeature !== undefined && (
+        themHasFeature ? 
+          <Check className="h-5 w-5 text-gray-400 bg-gray-400/20 p-1 rounded-full" /> : 
+          <X className="h-5 w-5 text-red-500 bg-red-500/20 p-1 rounded-full" />
+      )}
+      {them}
+    </div>
   </div>
 );
 
@@ -123,12 +139,16 @@ const WhyChooseUsSection = () => {
                 us="0.01 SOL" 
                 them="0.1 - 1 SOL"
                 highlight
+                usHasFeature={true}
+                themHasFeature={false}
               />
               
               <ComparisonItem 
                 title="Creation Time" 
                 us="30 seconds" 
                 them="5-10 minutes"
+                usHasFeature={true}
+                themHasFeature={false}
               />
               
               <ComparisonItem 
@@ -136,12 +156,16 @@ const WhyChooseUsSection = () => {
                 us="None" 
                 them="Some"
                 highlight
+                usHasFeature={true}
+                themHasFeature={false}
               />
               
               <ComparisonItem 
                 title="Token Verification" 
                 us="Automatic" 
                 them="Manual"
+                usHasFeature={true}
+                themHasFeature={true}
               />
               
               <ComparisonItem 
@@ -149,12 +173,16 @@ const WhyChooseUsSection = () => {
                 us="Included" 
                 them="Extra Cost"
                 highlight
+                usHasFeature={true}
+                themHasFeature={false}
               />
               
               <ComparisonItem 
                 title="User Interface" 
                 us="Simple & Intuitive" 
                 them="Complex"
+                usHasFeature={true}
+                themHasFeature={false}
               />
               
               <ComparisonItem 
@@ -162,6 +190,17 @@ const WhyChooseUsSection = () => {
                 us="Comprehensive" 
                 them="Limited"
                 highlight
+                usHasFeature={true}
+                themHasFeature={false}
+              />
+              
+              <ComparisonItem 
+                title="Unlimited Referrals" 
+                us="0.1 SOL each" 
+                them="Not Available"
+                highlight
+                usHasFeature={true}
+                themHasFeature={false}
               />
               
               <div className="mt-6 p-4 bg-flashmeme-yellow/10 rounded-lg border border-flashmeme-yellow/30">
